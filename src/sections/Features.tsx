@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { QrCode, Monitor, CreditCard, BarChart3, BellRing, Settings2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../lib/analytics';
 
 const features = [
   {
@@ -113,7 +114,11 @@ export default function Features() {
             const isNorth = feature.type === 'north';
             return (
               <motion.div key={idx} variants={itemVariants} className="h-full w-full block">
-                <Link to={feature.link} className="block w-full h-full">
+                <Link 
+                  to={feature.link} 
+                  onClick={() => trackEvent('feature_card_click', { feature_name: feature.title, destination_url: feature.link })}
+                  className="block w-full h-full"
+                >
                   <div className="group relative h-full bg-steward-surface border border-steward-border rounded-xl p-[32px] overflow-hidden hover:border-steward-border/80 hover:shadow-steward-md transition-all duration-300 flex flex-col items-start cursor-pointer">
                     {/* Hover Glow Effect */}
                     <div 

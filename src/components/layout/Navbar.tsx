@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { CONTACT_INFO } from '../../config/contact';
 import stewardLogo from '../../assets/logos/Steward_Logo.png';
+import { trackEvent } from '../../lib/analytics';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,6 +91,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    onClick={() => trackEvent('navbar_click', { button_text: link.label, destination_url: link.href, section_name: 'navbar' })}
                     aria-current={isActive ? 'page' : undefined}
                     className={`relative px-4 py-2 rounded-full text-sm font-medium font-primary transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                       isActive
@@ -117,6 +119,7 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <a
             href={CONTACT_INFO.whatsappUrl}
+            onClick={() => trackEvent('whatsapp_click', { button_text: 'Book a Demo', destination_url: CONTACT_INFO.whatsappUrl, section_name: 'navbar' })}
             className="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold font-primary transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             style={{
               background: 'linear-gradient(135deg, #A0A0A0 0%, #404040 50%, #050505 100%)',
@@ -194,7 +197,10 @@ export default function Navbar() {
                       >
                         <a
                           href={link.href}
-                          onClick={() => setIsMenuOpen(false)}
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            trackEvent('navbar_click', { button_text: link.label, destination_url: link.href, section_name: 'navbar_mobile' });
+                          }}
                           aria-current={isActive ? 'page' : undefined}
                           className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium font-primary transition-all duration-150 hover:bg-white/[0.04] focus:outline-none focus-visible:ring-2 focus-visible:ring-white ${
                             isActive
@@ -216,7 +222,10 @@ export default function Navbar() {
               <div className="px-3 pb-3">
                 <a
                   href={CONTACT_INFO.whatsappUrl}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    trackEvent('whatsapp_click', { button_text: 'Book a Demo', destination_url: CONTACT_INFO.whatsappUrl, section_name: 'navbar_mobile' });
+                  }}
                   className="flex items-center justify-center w-full px-6 py-3 font-semibold font-primary rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white transition-all text-sm"
                   style={{
                     background: 'linear-gradient(135deg, #A0A0A0 0%, #404040 50%, #050505 100%)',

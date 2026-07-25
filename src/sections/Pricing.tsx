@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Compass, Navigation2 } from 'lucide-react';
+import { trackEvent } from '../lib/analytics';
 
 const plans = [
   {
@@ -151,6 +152,7 @@ export default function Pricing() {
               {/* Action Button */}
               <a
                 href={plan.ctaLink}
+                onClick={() => trackEvent('pricing_plan_selected', { plan_name: plan.name, button_text: plan.ctaText })}
                 className={`touch-target flex items-center justify-center w-full px-[36px] py-[16px] text-base font-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas transition-all duration-200 relative z-10 ${
                   plan.isHighlighted
                     ? 'font-semibold text-white rounded-lg hover:brightness-110'

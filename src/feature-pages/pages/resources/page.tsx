@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Calculator, BarChart3 } from 'lucide-react';
 import SEOHead from '@/seo/SEOHead';
 import { CONTACT_INFO } from '@/config/contact';
+import { trackEvent } from '@/lib/analytics';
 
 const RESOURCES = [
   {
@@ -99,6 +100,7 @@ export default function ResourcesPage() {
               <motion.a
                 key={resource.title}
                 href={resource.href}
+                onClick={() => trackEvent('article_click', { button_text: resource.title, destination_url: resource.href, section_name: 'resources' })}
                 variants={fadeVariants}
                 className="group flex flex-col bg-steward-surface border border-steward-border rounded-xl p-[32px] sm:p-[48px] relative overflow-hidden transition-all duration-300 hover:border-steward-border/80 hover:bg-steward-hover hover:shadow-steward-md focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-accent focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas"
               >

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../config/contact';
+import { trackEvent } from '../lib/analytics';
 
 function HeroContent() {
   const containerVariants = {
@@ -72,6 +73,10 @@ function CTAGroup() {
       {/* Primary CTA - Greyscale */}
       <a
         href={CONTACT_INFO.whatsappUrl}
+        onClick={() => {
+          trackEvent('hero_cta_click', { button_text: 'Set Course', destination_url: CONTACT_INFO.whatsappUrl, section_name: 'hero' });
+          trackEvent('whatsapp_click', { button_text: 'Set Course', destination_url: CONTACT_INFO.whatsappUrl, section_name: 'hero' });
+        }}
         className="touch-target flex items-center justify-center w-full sm:w-auto px-[36px] py-[14px] text-sm font-semibold font-primary rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         style={{
           background: 'linear-gradient(135deg, #A0A0A0 0%, #404040 50%, #050505 100%)',
@@ -85,6 +90,7 @@ function CTAGroup() {
       {/* Secondary CTA - Ghost */}
       <a
         href="#product"
+        onClick={() => trackEvent('hero_cta_click', { button_text: 'View Instruments', destination_url: '#product', section_name: 'hero' })}
         className="touch-target flex items-center justify-center w-full sm:w-auto px-[36px] py-[14px] text-sm font-medium font-primary rounded-full border border-white/[0.12] text-white/70 hover:text-white hover:border-white/[0.2] hover:bg-white/[0.04] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
       >
         View Instruments

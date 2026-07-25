@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import { initGA, trackPageView, trackEvent } from './lib/analytics';
 import SEOHead from './seo/SEOHead';
 import Navbar from './components/layout/Navbar';
 import CompassBackground from './components/layout/CompassBackground';
@@ -106,6 +107,48 @@ function LandingPage() {
 
 export default function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    initGA();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // Only track scroll depth on the main landing page
+    if (location.pathname !== '/') return;
+
+    const thresholds = [25, 50, 75, 100];
+    const fired = new Set<number>();
+
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (docHeight <= 0) return;
+
+      const scrollPercent = (scrollTop / docHeight) * 100;
+
+      thresholds.forEach((threshold) => {
+        if (scrollPercent >= threshold && !fired.has(threshold)) {
+          fired.add(threshold);
+          trackEvent('scroll_depth', {
+            scroll_depth: threshold,
+            page_name: 'landing_page',
+          });
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run once on load/mount in case they are already scrolled
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [location.pathname]);
 
   return (
     <div className="flex flex-col min-h-screen bg-steward-canvas text-steward-text-secondary">

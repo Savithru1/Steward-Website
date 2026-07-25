@@ -1,8 +1,25 @@
 import { CONTACT_INFO } from '../../config/contact';
 import stewardLogo from '../../assets/logos/Steward_Logo.png';
+import { trackEvent } from '../../lib/analytics';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const handleFooterLinkClick = (text: string, href: string) => {
+    trackEvent('footer_link_click', { button_text: text, destination_url: href, section_name: 'footer' });
+  };
+
+  const handleWhatsAppClick = (text: string, href: string) => {
+    trackEvent('whatsapp_click', { button_text: text, destination_url: href, section_name: 'footer' });
+  };
+
+  const handleEmailClick = (text: string, href: string) => {
+    trackEvent('email_click', { button_text: text, destination_url: href, section_name: 'footer' });
+  };
+
+  const handleSocialClick = (text: string, href: string) => {
+    trackEvent('social_link_click', { button_text: text, destination_url: href, section_name: 'footer' });
+  };
 
   return (
     <footer className="w-full bg-steward-canvas border-t border-steward-border pt-[120px] pb-[64px]" aria-label="Site Footer">
@@ -29,22 +46,22 @@ export default function Footer() {
             </span>
             <ul className="space-y-[12px]">
               <li>
-                <a href="/#product" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#product" onClick={() => handleFooterLinkClick('Product', '/#product')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Product
                 </a>
               </li>
               <li>
-                <a href="/#features" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#features" onClick={() => handleFooterLinkClick('Features', '/#features')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Features
                 </a>
               </li>
               <li>
-                <a href="/#pricing" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#pricing" onClick={() => handleFooterLinkClick('Pricing', '/#pricing')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Pricing
                 </a>
               </li>
               <li>
-                <a href={CONTACT_INFO.whatsappUrl} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href={CONTACT_INFO.whatsappUrl} onClick={() => { handleFooterLinkClick('Book a Demo', CONTACT_INFO.whatsappUrl); handleWhatsAppClick('Book a Demo', CONTACT_INFO.whatsappUrl); }} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Book a Demo
                 </a>
               </li>
@@ -58,17 +75,17 @@ export default function Footer() {
             </span>
             <ul className="space-y-[12px]">
               <li>
-                <a href="/#about" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#about" onClick={() => handleFooterLinkClick('About', '/#about')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   About
                 </a>
               </li>
               <li>
-                <a href="/#early-partners" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#early-partners" onClick={() => handleFooterLinkClick('Early Partners', '/#early-partners')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Early Partners
                 </a>
               </li>
               <li>
-                <a href={`mailto:${CONTACT_INFO.email}`} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href={`mailto:${CONTACT_INFO.email}`} onClick={() => { handleFooterLinkClick('Contact', `mailto:${CONTACT_INFO.email}`); handleEmailClick('Contact', `mailto:${CONTACT_INFO.email}`); }} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Contact
                 </a>
               </li>
@@ -82,32 +99,32 @@ export default function Footer() {
             </span>
             <ul className="space-y-[12px]">
               <li>
-                <a href="/resources" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/resources" onClick={() => handleFooterLinkClick('All Resources', '/resources')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   All Resources
                 </a>
               </li>
               <li>
-                <a href="/resources/end-of-pos-report" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/resources/end-of-pos-report" onClick={() => handleFooterLinkClick('End of POS Report', '/resources/end-of-pos-report')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   End of POS Report
                 </a>
               </li>
               <li>
-                <a href="/resources/food-cost-calculator" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/resources/food-cost-calculator" onClick={() => handleFooterLinkClick('Food Cost Calculator', '/resources/food-cost-calculator')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Food Cost Calculator
                 </a>
               </li>
               <li>
-                <a href="/#faq" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/#faq" onClick={() => handleFooterLinkClick('Frequently Asked Questions', '/#faq')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Frequently Asked Questions
                 </a>
               </li>
               <li>
-                <a href="/privacy" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/privacy" onClick={() => handleFooterLinkClick('Privacy Policy', '/privacy')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Privacy Policy
                 </a>
               </li>
               <li>
-                <a href="/terms" className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+                <a href="/terms" onClick={() => handleFooterLinkClick('Terms of Service', '/terms')} className="touch-target font-primary font-regular text-sm text-steward-text-secondary hover:text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                   Terms of Service
                 </a>
               </li>
@@ -121,7 +138,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row sm:items-center gap-[16px] sm:gap-[32px] flex-wrap">
             <span className="font-primary text-sm text-steward-text-secondary font-regular">
               Email:{' '}
-              <a href={`mailto:${CONTACT_INFO.email}`} className="text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+              <a href={`mailto:${CONTACT_INFO.email}`} onClick={() => handleEmailClick('Email Link', `mailto:${CONTACT_INFO.email}`)} className="text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                 {CONTACT_INFO.email}
               </a>
             </span>
@@ -133,7 +150,7 @@ export default function Footer() {
             </span>
             <span className="font-primary text-sm text-steward-text-secondary font-regular">
               WhatsApp:{' '}
-              <a href={CONTACT_INFO.whatsappUrl} className="text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
+              <a href={CONTACT_INFO.whatsappUrl} onClick={() => handleWhatsAppClick('WhatsApp Link', CONTACT_INFO.whatsappUrl)} className="text-steward-text-primary hover:underline underline-offset-4 decoration-1 decoration-steward-accent font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas rounded-md">
                 Message Us
               </a>
             </span>
@@ -158,6 +175,7 @@ export default function Footer() {
               Built by{' '}
               <a 
                 href="https://craftyoursystems.in" 
+                onClick={() => handleSocialClick('CraftYourSystems', 'https://craftyoursystems.in')}
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-sm font-medium text-steward-text-secondary hover:text-steward-text-primary transition-colors duration-200"

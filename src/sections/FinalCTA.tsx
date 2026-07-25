@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../config/contact';
+import { trackEvent } from '../lib/analytics';
 
 export default function FinalCTA() {
   const containerVariants = {
@@ -71,6 +72,9 @@ export default function FinalCTA() {
           {/* Primary CTA - Prominent padding and font-semibold, Touch target >= 44px */}
           <a
             href={CONTACT_INFO.whatsappUrl}
+            onClick={() => {
+              trackEvent('whatsapp_click', { button_text: 'Book a Demo', destination_url: CONTACT_INFO.whatsappUrl, section_name: 'final_cta' });
+            }}
             className="touch-target flex items-center justify-center w-full sm:w-auto px-[40px] py-[16px] text-base font-semibold font-primary text-white border-0 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas steward-interactive hover:brightness-110"
             style={{
               background: 'linear-gradient(135deg, #A0A0A0 0%, #404040 50%, #050505 100%)',
@@ -83,6 +87,9 @@ export default function FinalCTA() {
           {/* Secondary CTA - Balanced padding and font-medium, Touch target >= 44px */}
           <a
             href={`mailto:${CONTACT_INFO.email}`}
+            onClick={() => {
+              trackEvent('email_click', { button_text: 'Contact Us', destination_url: `mailto:${CONTACT_INFO.email}`, section_name: 'final_cta' });
+            }}
             className="touch-target flex items-center justify-center w-full sm:w-auto px-[36px] py-[16px] text-base font-medium font-primary border border-steward-text-primary text-steward-text-primary bg-transparent rounded-md hover:bg-steward-text-primary hover:text-steward-canvas focus:outline-none focus-visible:ring-2 focus-visible:ring-steward-focus focus-visible:ring-offset-2 focus-visible:ring-offset-steward-canvas steward-interactive"
           >
             Contact Us
